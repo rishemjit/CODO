@@ -14,29 +14,19 @@ A structure called options is created with the value of 'param1' to value1, 'par
 
  Description of sitoOptimset parameters
 
-# Parameters	Description
-	
-# PopulationType 
-The type of Population being entered There are two options in the current release: 'doubleVector', ‘bitstring’. The default value is ‘bitstring’.
-# PopInitRange 
-Initial range of values of a population. The default value is [0:1]. For variant 'CODO', the value can be [Xmin, Xmax].
-#SocietySize 
-Positive scalar indicating the Society Size. The user should input a positive scalar number indicating row or column of square topology. e.g. SocietySize of 7 indicates a society of 49 individuals in 7 x 7 matrix. 
-# NeighbourhoodSize
-	 It is the size of Moore neighbourhood. The value can be any positive integer and should be less than SocietySize.
-# DiversityFactor 
-It is the probability k with which an individual may change its attitude. The value may range between [0:1]. For variant 'CODO', the value can be any real no. 
-# InitialPopulation
-It is a matrix representing the initial attitudes of the society. This matrix could be a 3D matrix of size [SocietySize x SocietySize x length of ‘bitstring’] or a 2D matrix of size [SocietySize2 x length of ‘bitstring’]. If not supplied, a random 3D matrix is generated. 
-# CreationFcn
-Handle to a user defined function for the generation of initial population. 
-Display 	If set ‘on’, plots of iteration vs. fitness values (i.e. min, max and average) and society’s strength colour map is displayed. 
-# MaxIteration 
-Positive scalar indicating the maximum iterations desired. The default value is 100. 
-# Variant
-Various binary variants of SITO included in current release are “Osito/SsitoSum/SsitoMean/Gsito/CODO”
-# Group
-If variant used is “Gsito” then the user can specify the Group. The average neighborhood size of individuals is 5.
+|Parameters|	Description|
+|---| ---|	
+|PopulationType| The type of Population being entered There are two options in the current release: 'doubleVector', ‘bitstring’. The default value is ‘bitstring’.|
+|PopInitRange | Initial range of values of a population. The default value is [0:1]. For variant 'CODO', the value can be [Xmin, Xmax].|
+|SocietySize|Positive scalar indicating the Society Size. The user should input a positive scalar number indicating row or column of square topology. e.g. SocietySize of 7 indicates a society of 49 individuals in 7 x 7 matrix.| 
+|NeighbourhoodSize|It is the size of Moore neighbourhood. The value can be any positive integer and should be less than SocietySize.|
+| DiversityFactor |It is the probability k with which an individual may change its attitude. The value may range between [0:1]. For variant 'CODO', the value can be any real no. |
+|InitialPopulation|It is a matrix representing the initial attitudes of the society. This matrix could be a 3D matrix of size [SocietySize x SocietySize x length of ‘bitstring’] or a 2D matrix of size [SocietySize2 x length of ‘bitstring’]. If not supplied, a random 3D matrix is generated. |
+|CreationFcn|Handle to a user defined function for the generation of initial population. |
+|Display|	If set ‘on’, plots of iteration vs. fitness values (i.e. min, max and average) and society’s strength colour map is displayed. |
+|MaxIteration|Positive scalar indicating the maximum iterations desired. The default value is 100. |
+|Variant|Various binary variants of SITO included in current release are “Osito/SsitoSum/SsitoMean/Gsito/CODO”|
+|Group|If variant used is “Gsito” then the user can specify the Group. The average neighborhood size of individuals is 5.|
 
 
 # 2.	function [x, fVal] = Sito(funct, nvars, options) 
@@ -50,14 +40,20 @@ OUTPUT:  x: Best individual’s attitudes obtained after iterations completion.
         fVal: the value of the fitness function at x.
 
 2.1	Example of a binary optimization function (Hamming function):
- y = Hamming(x)
+
+y = Hamming(x)
+ 
 INPUT     : x accepts binary vector of an individual’s attitudes. 
                     Dimensions of x (No_of_Features x 1)
+                    
 OUTPUT:  y is the scalar (fitness value) evaluated at x.
 
 2.2	Example of a real valued optimization function :
+
 y = rastriginfn(x)
+
 INPUT    :  x accepts binary vector of an individual’s attitudes 
+
 OUTPUT:  y is the scalar (fitness value) evaluated at x.
 
 SITO is a binary optimizer which optimizes the binary optimization problems. For a real valued optimization problem, the individual’s attitudes (No_of_Features x 1) are converted to codewords using codeWordfn. Like in Rastriginfn if No_of_Features = 34 then codewords = 2 with each codeword size =17.  These codewords (2) are encoded to real values (2) using bin2real function. After this scalar (fitness value) is evaluated at real values (2).
@@ -70,14 +66,14 @@ SITO minimize the objective or fitness function. If user wants to use an anonymo
 Fitness Functions:
 
 The benchmark functions are designed as:
-
+```
 -	 function   y   =  fitnessfcn( x )
 
 INPUT    : x accepts binary vector of an individual’s attitudes. Dimensions of x (No_of_Features x 1)
 OUTPUT: y is the scalar (fitness value) evaluated at x.
 
 The algorithms developed in SitoLIB are employed and tested on seven benchmark problems. 
-
+```
 -	OneMax
 The OneMax or one maximum function counts the number of 1s in the string (formed by combining the binary value of each dimension of single individual). The function locally searches for the individual with maximum number of one’s.
 
@@ -87,15 +83,16 @@ Hamming function computes the hamming distance between individual's attitudes wi
 -	Order3Deceptive
 Goldberg’s Order3Deceptive problem computes number of ones in 3-bit substring. Fitness is computed using mapping table which maps substring to value as below:
 
-String	Mapped value
-000	28
-001	26
-010	22
-011	0
-100	14
-101	0
-110	0
-111	30
+|String | Mapped value |
+| --- | --- |
+| 000 |	28 |
+| 001 |	26 |
+| 010 |	22 |
+| 011 |	0 |
+| 100 |	14 |
+| 101 |	0 |
+| 110 |	0 |
+| 111 |	30 |
 
 Usage Description:
 The user should provide number of features as multiple of three as the problem is of order 3. Otherwise the error message is displayed on screen. So, sizeCodeword is set to 3 and should not be altered by user.
