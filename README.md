@@ -4,11 +4,11 @@ MATLAB library implementation
 
 The MATLAB library implementation has been designed on the similar lines of the already available GA toolbox of MATLAB. The example usage is given in the file sitodriver.m. It contains two functions namely: 
 
-# 1.	function options = sitoOptimset(varargin) 
+## 1.	function options = sitoOptimset(varargin) 
 
 The function sitoOptimset should be called as 
 
-options=sitoOptimset('param1',value1,'param2',value2,....). 
+*options=sitoOptimset('param1',value1,'param2',value2,....).*
 
 A structure called options is created with the value of 'param1' to value1, 'param2' to value2, and so on. The unspecified parameters are set to their default values. The parameter names are case insensitive. The parameters and their description have been listed below
 
@@ -29,33 +29,34 @@ A structure called options is created with the value of 'param1' to value1, 'par
 |Group|If variant used is “Gsito” then the user can specify the Group. The average neighborhood size of individuals is 5.|
 
 
-# 2.	function [x, fVal] = Sito(funct, nvars, options) 
+## 2.	function [x, fVal] = Sito(funct, nvars, options) 
 function [x, fVal] = Sito(funct, nvars)
 
 Sito function is called and it takes the parameters values as specified in options structure. If the options structure is unspecified than solver takes default values.
- 
+``` 
 INPUT    : funct: A function handle to the fitness function. 
            nvars: Positive integer which represents the number of variables in the problem. 
+           
 OUTPUT:  x: Best individual’s attitudes obtained after iterations completion. 
-        fVal: the value of the fitness function at x.
-
+         fVal: the value of the fitness function at x.
+```
 2.1	Example of a binary optimization function (Hamming function):
-
+```
 y = Hamming(x)
  
 INPUT     : x accepts binary vector of an individual’s attitudes. 
                     Dimensions of x (No_of_Features x 1)
                     
 OUTPUT:  y is the scalar (fitness value) evaluated at x.
-
+```
 2.2	Example of a real valued optimization function :
-
-y = rastriginfn(x)
+```
+y = Rastriginfn(x)
 
 INPUT    :  x accepts binary vector of an individual’s attitudes 
 
 OUTPUT:  y is the scalar (fitness value) evaluated at x.
-
+```
 SITO is a binary optimizer which optimizes the binary optimization problems. For a real valued optimization problem, the individual’s attitudes (No_of_Features x 1) are converted to codewords using codeWordfn. Like in Rastriginfn if No_of_Features = 34 then codewords = 2 with each codeword size =17.  These codewords (2) are encoded to real values (2) using bin2real function. After this scalar (fitness value) is evaluated at real values (2).
 A sample implementation has been provided in the sitodriver.m file. 
 Anonymous Objective Function:
