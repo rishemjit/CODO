@@ -82,13 +82,13 @@ OUTPUT: y is the scalar (fitness value) evaluated at x.
 
 The algorithms developed in SitoLIB are employed and tested on several benchmark problems. 
 ```
--	OneMax
+-	OneMax:
 The OneMax or one maximum function counts the number of 1s in the string (formed by combining the binary value of each dimension of single individual). The function locally searches for the individual with maximum number of one’s.
 
--	Hamming
+-	Hamming:
 Hamming function computes the hamming distance between individual's attitudes with the default string specified. The function tries to minimize the hamming distance.
 
--	Order3Deceptive
+-	Order3Deceptive:
 Goldberg’s Order3Deceptive problem computes number of ones in 3-bit substring. Fitness is computed using mapping table which maps substring to value as below:
 
 |String | Mapped value |
@@ -116,31 +116,4 @@ f<sub>3</sub>  is the Order3Deceptive function.
 
 Usage Description:
 The Bipolar is order-6 deceptive problem so the user should set number of features as multiple of six. Otherwise the error message is displayed on screen. So, sizeCodeword is set to 6 and should not be altered by user.
-
-Ecc
-In Error correcting code (Ecc) design problem, the transmitting message is partitioned into codewords of fixed length. Further, each codeword is assigned to the alphabet which minimizes the minimal hamming distance of the codewords. The objective function to be minimized is:
-    f= 1/(∑_(i=1)^n▒∑_(j=1)^n▒1/δ^2 )                                                                                        
-n is the number of codewords in message.
-δ is the hamming distance between ith and jth codeword. 
-
-
-Usage Description:
-In Ecc, n codewords are formed according to the size specified in sizeCodeword. In this paper, sizeCodeword  is set to 12. The user can change sizeCodeword as per requirement. The number of features should be multiple of specified size of codeword otherwise error message is displayed.
-
--	MaxCut 
-In Maximum Cut graph problem, cut operation on the undirected, weighted graph leads to partition of vertices of graph into two disjoint subsets of vertices such that sum of weighted edges having endpoints in different subsets is maximized. The formula for computing fitness is given by:
-
-   f= ∑_(i=1)^(n-1)▒∑_(j=i+1)^n▒〖w_ij  .[x_i (1-x_j )+x_j (1-x_i )]〗
-   
-   〖w〗_ij  is the weight of edge with endpoints {i,j}. w_ij  participate in summation only if i and j 	belong to different subsets.
-
-
-	Rastrigin
-Rastrigin problem is scalable and highly multimodal. This problem has large number of local minima. Rastrigin function is defined as:
-
-   f=10.n+ ∑_(i=1)^n▒〖x_i^2- 10.cos⁡(2.π.x_i 〗   
-where -5.12≤x_i≤5.12
-
-n is the number of features
-x is the real value 
 
