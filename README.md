@@ -69,7 +69,7 @@ A sample implementation has been provided in the sitodriver.m file.
 Anonymous Objective Function:
 In SitoLIB, there are seven different benchmark functions included. If a user wants to use some different objective function than user must first write a MATLAB file for an anonymous function that you want to optimize. The function should accept a vector whose length is the number of features representing individual’s attitudes, and should return a scalar. 
 Minimizing Fitness Function: 
-SITO minimize the objective or fitness function. If user wants to use an anonymous objective function than write function file to compute function. The problem is of type minimize f(x). If problem is to maximize f(x) than minimize –f(x) is used because the point at which the minimum of –f(x) occurs is the same as that of f(x).
+SITO minimize the objective or fitness function. If user wants to use an anonymous objective function than write function file to compute function. The problem is of type minimize f(x). If problem is to maximize f(x) then minimize –f(x) is used because the point at which the minimum of –f(x) occurs is the same as that of f(x).
 
 Fitness Functions:
 
