@@ -1,5 +1,11 @@
 # CODO
-Over the last decades, a lot of research has been carried out to bring forward many nature-inspired, optimization techniques. The behaviour pattern of natural phenomena such as evolution of species, working of neural networks etc. has been effectively simulated to perform various computing tasks. SitoLIB is an open source library for human opinion formation based optimizer. It includes social impact theory based optimizer (SITO) and Durkheim's theory of social integration based optimizer(CODO). The goal is to develop an easy to understand, general-purpose software library which can be incorporated in application-specific systems. The present version of library includes the binary version and continuous(real-valued) version of the optimizer. Our binary implementation is based on theory of social impact given by [Latane, 1981] and pseudo code of the optimizer given by [Macas, 2008]. The continuous implementation referred as Continuous Opinion Dynamics Optimizer (CODO) is based on Durkheim's theory of social integration[Durkheim,1997] and pseudo code of the optimizer given by [Rishemjit, 2013]. So far, one variant of CODO and three different variants of SITO are implemented in the library for minimization of objection function which includes • OSITO (original SITO algorithm), • SSITOsum (Simplified SITO with SUM rule), SSITOmean Simplified SITO with MEAN rule) and • GSITO (Galam-inspired SITO).  These variants have been effectively brought into use in different applications such as feature subset selection using UCI machine learning repository datasets [Macas, 2007], itongue optimization [Bhondekar, 2011], and enhancing e-nose performance [R. Kaur, 2012]. CODO has been used for optimization of complex mathematical functions[R. Kaur, 2013]
+Over the last decades, a lot of research has been carried out to bring forward many nature-inspired, optimization techniques.  SitoLIB is an open source library for human opinion formation based optimizer. It includes social impact theory based optimizer (SITO) and Durkheim's theory of social integration based optimizer(CODO). The goal is to develop an easy to understand, general-purpose software library which can be incorporated in application-specific systems. The present version of library includes the binary version and continuous(real-valued) version of the optimizer. Our binary implementation is based on theory of social impact given by [Latane, 1981] and pseudo code of the optimizer given by [Macas, 2008]. The continuous implementation referred as Continuous Opinion Dynamics Optimizer (CODO) is based on Durkheim's theory of social integration[Durkheim,1997] and pseudo code of the optimizer given by [Rishemjit, 2013]. So far, one variant of CODO and following different variants of SITO are implemented in the library for minimization of objection function: 
+-	 OSITO (original SITO algorithm), 
+-	 SSITOsum (Simplified SITO with SUM rule), 
+-	 SSITOmean Simplified SITO with MEAN rule) and 
+-	 GSITO (Galam-inspired SITO).  
+
+These variants have been effectively brought into use in different applications such as feature subset selection using UCI machine learning repository datasets [Macas, 2007], itongue optimization [Bhondekar, 2011], and enhancing e-nose performance [R. Kaur, 2012]. CODO has been used for optimization of complex mathematical functions[R. Kaur, 2013]
 MATLAB library implementation
 
 The MATLAB library implementation has been designed on the similar lines of the already available GA toolbox of MATLAB. The example usage is given in the file sitodriver.m. It contains two functions namely: 
@@ -30,10 +36,11 @@ A structure called options is created with the value of 'param1' to value1, 'par
 
 
 ## 2.	function [x, fVal] = Sito(funct, nvars, options) 
-function [x, fVal] = Sito(funct, nvars)
+
 
 Sito function is called and it takes the parameters values as specified in options structure. If the options structure is unspecified than solver takes default values.
 ``` 
+function [x, fVal] = Sito(funct, nvars)
 INPUT    : funct: A function handle to the fitness function. 
            nvars: Positive integer which represents the number of variables in the problem. 
            
@@ -57,7 +64,7 @@ INPUT    :  x accepts binary vector of an individual’s attitudes
 
 OUTPUT:  y is the scalar (fitness value) evaluated at x.
 ```
-SITO is a binary optimizer which optimizes the binary optimization problems. For a real valued optimization problem, the individual’s attitudes (No_of_Features x 1) are converted to codewords using codeWordfn. Like in Rastriginfn if No_of_Features = 34 then codewords = 2 with each codeword size =17.  These codewords (2) are encoded to real values (2) using bin2real function. After this scalar (fitness value) is evaluated at real values (2).
+SITO is a binary optimizer which optimizes the binary optimization problems. For a real valued optimization problem, the individual’s attitudes (No_of_Features x 1) are converted to codewords using codeWordfn. Like in Rastriginfn if No_of_Features = 34 then codewords = 2 with each codeword size =17.  These codewords are encoded to real values using bin2real function. After this scalar (fitness value) is evaluated at real values.
 A sample implementation has been provided in the sitodriver.m file. 
 Anonymous Objective Function:
 In SitoLIB, there are seven different benchmark functions included. If a user wants to use some different objective function than user must first write a MATLAB file for an anonymous function that you want to optimize. The function should accept a vector whose length is the number of features representing individual’s attitudes, and should return a scalar. 
@@ -68,12 +75,12 @@ Fitness Functions:
 
 The benchmark functions are designed as:
 ```
--	 function   y   =  fitnessfcn( x )
+function   y   =  fitnessfcn( x )
 
 INPUT    : x accepts binary vector of an individual’s attitudes. Dimensions of x (No_of_Features x 1)
 OUTPUT: y is the scalar (fitness value) evaluated at x.
 
-The algorithms developed in SitoLIB are employed and tested on seven benchmark problems. 
+The algorithms developed in SitoLIB are employed and tested on several benchmark problems. 
 ```
 -	OneMax
 The OneMax or one maximum function counts the number of 1s in the string (formed by combining the binary value of each dimension of single individual). The function locally searches for the individual with maximum number of one’s.
@@ -101,11 +108,11 @@ The user should provide number of features as multiple of three as the problem i
 -	Bipolar
 In multimodal deceptive problem of order 6, the fitness is calculated as the sum of the partial fitness functions. In this problem, only number of ones is computed in the binary substring. The function f6 is applied to the disjoint six-bit substrings of the string to compute the fitness of an individual. 
 Formula used for computing fitness is:
-f_6 (u)= f_3 (|3-u| )                                                         
-where f_3 (0,1,2,3)={.9,.8,0,1}
+f<sub>6</sub> (u)= f<sub>3</sub> (|3-u| )                                                         
+where f<sub>3</sub> (0,1,2,3)={.9,.8,0,1}
 
 u is the number of ones in six-bit substring.
-f_3 is the Order3Deceptive function.
+f<sub>3</sub>  is the Order3Deceptive function.
 
 Usage Description:
 The Bipolar is order-6 deceptive problem so the user should set number of features as multiple of six. Otherwise the error message is displayed on screen. So, sizeCodeword is set to 6 and should not be altered by user.
